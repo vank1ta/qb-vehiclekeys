@@ -1,7 +1,7 @@
 # qb-vehiclekeys
 Vehicle Keys System For QB-Core 
 
-# Development's editing
+# VT Development's editing
 Removed the search for keys and added a new function for easier integration with the spawn job to treat the cars as yours and not smash them.
 
 # The new spawn vehicle integration
