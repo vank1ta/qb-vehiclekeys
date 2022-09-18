@@ -1,4 +1,4 @@
--- Variables
+-- Variableswiring
 
 local QBCore = exports['qb-core']:GetCoreObject()
 local HasVehicleKey = false
@@ -197,7 +197,18 @@ local function LockpickDoor(isAdvanced)
             local vehLockStatus = GetVehicleDoorLockStatus(vehicle)
             if (vehLockStatus > 0) then
                 usingAdvanced = isAdvanced
-                TriggerEvent('qb-lockpick:client:openLockpick', lockpickFinish)
+                loadAnimDict("veh@break_in@0h@p_m_one@")
+                TaskPlayAnim(ped, "veh@break_in@0h@p_m_one@", "low_force_entry_ds", 3.0, 3.0, -1, 16, 0, 0, 0, 0)
+                --TriggerEvent('qb-lockpick:client:openLockpick', lockpickFinish)
+                exports['qb-vehiclekeys']:Circle(function(success)
+                    if success then
+                        lockpickFinish(success)
+                        TaskPlayAnim(ped, "veh@break_in@0h@p_m_one@", "low_force_entry_ds", 3.0, 3.0, -1, 16, 0, 0, 0, 0)
+                    else
+                        TriggerServerEvent('hud:server:GainStress', math.random(1, 4))
+                        QBCore.Functions.Notify("You failed lock-pick the vehicle !", "error")
+                    end
+                    end, 2, 20) -- NumberOfCircles, MS
             end
         end
     end

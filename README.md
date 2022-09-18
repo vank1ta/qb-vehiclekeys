@@ -4,6 +4,10 @@ Vehicle Keys System For QB-Core
 # VT Development's editing
 Removed the search for keys and added a new function for easier integration with the spawn job to treat the cars as yours and not smash them.
 
+# New Update 1.0.2
+Added skillbar to unlock the cars without any plugins like qb-lockpick / qb-lock etc everything is integrated to the resource.
+The skill bar is nopixel 3.5 styled.
+
 # The new spawn vehicle integration
 
 ```

@@ -1,0 +1,32 @@
+/* GLOBAL */
+
+.hidden {
+  display: none !important;
+}
+
+.proper {
+  border-image: linear-gradient(45deg, #ecc800, #564800) 1 !important;
+}
+.good {
+  background-color: #3cec54 !important;
+}
+.bad {
+  background-color: #F00F18 !important;
+}
+
+/* CIRCLE */
+#circle {
+  position: absolute;
+  margin: 50px auto;
+  top: 50%;
+  left:50%;
+  transform: translate(-50%,-50%);
+  overflow: visible;
+  height: 200ox;
+  width: 200px;
+  color:#822ff6
+}
+
+.contain {
+  object-fit: contain;
+}
