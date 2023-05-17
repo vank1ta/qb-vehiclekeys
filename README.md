@@ -16,7 +16,7 @@ Vehicle Keys System For QB-Core
 
 # Configuration
    ## General
-   `Config.Rob = true -- Enables robbing AI cars at gunpoint
+   ```Config.Rob = true -- Enables robbing AI cars at gunpoint
 -- All chances are 0-1 <= so lower == less chance, higher == higher chance
 Config.RemoveLockpickNormal = 0.5 -- Chance to remove lockpick on fail
 Config.RemoveLockpickAdvanced = 0.2 -- Chance to remove advanced lockpick on fail
@@ -54,7 +54,7 @@ Config.NoRobWeapons = { -- you can not jack a car with these weapons
     "WEAPON_Ball",
     "WEAPON_Snowball",
     "WEAPON_SmokeGrenade",
-}`
+}```
 
 # Integration exports
 
