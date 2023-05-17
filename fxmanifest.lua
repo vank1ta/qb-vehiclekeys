@@ -2,9 +2,9 @@ fx_version 'cerulean'
 game 'gta5'
 
 description 'QB-VehicleKeys - edit By: VT Development"s'
-version '1.0.2'
+version '1.0.3'
 
-shared_script {	
+shared_script {
     '@qb-core/shared/locale.lua',
     'locales/en.lua',
     'config.lua',

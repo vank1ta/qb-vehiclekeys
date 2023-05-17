@@ -79,6 +79,19 @@ QBCore.Functions.CreateCallback('vehiclekeys:server:CheckHasKey', function(sourc
     cb(CheckOwner(plate, Player.PlayerData.citizenid))
 end)
 
+QBCore.Functions.CreateCallback('vehiclekeys:server:GetVehicleKeys', function(source, cb)
+    local Player = QBCore.Functions.GetPlayer(source)
+    if not Player then return end
+    local citizenid = Player.PlayerData.citizenid
+    local keysList = {}
+    for plate, citizenids in pairs (VehicleList) do
+        if citizenids[citizenid] then
+            keysList[plate] = true
+        end
+    end
+    cb(keysList)
+end)
+
 -- command
 
 QBCore.Commands.Add("engine", "Toggle Engine", {}, false, function(source, args)
