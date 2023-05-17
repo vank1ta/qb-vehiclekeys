@@ -54,13 +54,14 @@ Config.NoRobWeapons = { -- you can not jack a car with these weapons
     "WEAPON_Ball",
     "WEAPON_Snowball",
     "WEAPON_SmokeGrenade",
-}```
+}
+```
 
 # Integration exports
 
-`
+```
      TriggerEvent("vehiclekeys:client:SetOwner", plate)
-`
+```
 
 # Credits
 
@@ -73,7 +74,7 @@ Config.NoRobWeapons = { -- you can not jack a car with these weapons
 https://streamable.com/uxs9ap
 
 # License
-
+```
     QBCore Framework
     Copyright (C) 2021 Joshua Eger
 
@@ -89,3 +90,4 @@ https://streamable.com/uxs9ap
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <https://www.gnu.org/licenses/>
+    ```
