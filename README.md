@@ -58,9 +58,9 @@ Config.NoRobWeapons = { -- you can not jack a car with these weapons
 
 # Integration exports
 
-```
+`
      TriggerEvent("vehiclekeys:client:SetOwner", plate)
-```
+`
 
 # Credits
 
