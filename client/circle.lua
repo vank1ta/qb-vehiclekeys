@@ -13,6 +13,7 @@ local function Circle(cb, circles, seconds)
     local result = Citizen.Await(p)
     cb(result)
 end
+
 exports("Circle", Circle)
 
 RegisterNUICallback('circle-fail', function(data, cb)

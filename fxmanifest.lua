@@ -2,7 +2,7 @@ fx_version 'cerulean'
 game 'gta5'
 
 description 'QB-VehicleKeys - edit By: VT Development"s'
-version '1.0.3'
+version '1.0.4'
 
 shared_script {
     '@qb-core/shared/locale.lua',
@@ -23,6 +23,10 @@ files {
       'html/js/*.js',
       'html/index.html',
       'html/style.css',
+}
+
+exports {
+  "Circle"
 }
 
 lua54 'yes'
