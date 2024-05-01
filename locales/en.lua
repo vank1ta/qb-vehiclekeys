@@ -28,15 +28,15 @@ local Translations = {
 
     },
     Progressbar = {
-        vrob = 'Attempting Robbery..'
+        vrob = 'Attempting Robbery..',
     },
     info = {
-        vtogglelocks = 'Toggle Vehicle Locks'
+        vtogglelocks = 'Toggle Vehicle Locks',
         vtoggleengine = 'Toggle Engine',
-        vgivekeys = 'Give Car Keys'
+        vgivekeys = 'Give Car Keys',
     },
     error = {
-        platenil = 'vehiclekeys:server:SetVehicleOwner - plate argument is nil'
+        platenil = 'vehiclekeys:server:SetVehicleOwner - plate argument is nil',
     }
 
 }
