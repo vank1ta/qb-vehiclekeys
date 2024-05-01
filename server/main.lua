@@ -45,7 +45,7 @@ RegisterNetEvent('vehiclekeys:server:SetVehicleOwner', function(plate)
             VehicleList[plate].owners[Player.PlayerData.citizenid] = true
         end
     else
-        print('vehiclekeys:server:SetVehicleOwner - plate argument is nil')
+        print(Lang:t("error.platenil"))
     end
 end)
 
@@ -55,13 +55,13 @@ RegisterNetEvent('vehiclekeys:server:GiveVehicleKeys', function(plate, target)
     if CheckOwner(plate, Player.PlayerData.citizenid) then
         if QBCore.Functions.GetPlayer(target) ~= nil then
             TriggerClientEvent('vehiclekeys:client:SetOwner', target, plate)
-            TriggerClientEvent('QBCore:Notify', src, "You gave the keys!")
-            TriggerClientEvent('QBCore:Notify', target, "You got the keys!")
+            TriggerClientEvent('QBCore:Notify', src, Lang:t("notify.vgivekeyss"))
+            TriggerClientEvent('QBCore:Notify', target, Lang:t("notify.vgotkey"))
         else
-            TriggerClientEvent('QBCore:Notify', source,  "Player Not Online", "error")
+            TriggerClientEvent('QBCore:Notify', source,  Lang:t("notify.vplayernotonline"), "error")
         end
     else
-        TriggerClientEvent('QBCore:Notify', source,  "You Dont Own This Vehicle", "error")
+        TriggerClientEvent('QBCore:Notify', source,  Lang:t("notify.vnotyourvehicle"), "error")
     end
 end)
 
@@ -94,11 +94,11 @@ end)
 
 -- command
 
-QBCore.Commands.Add("engine", "Toggle Engine", {}, false, function(source, args)
+QBCore.Commands.Add("engine", Lang:t("info.vtoggleengine"), {}, false, function(source, args)
 	TriggerClientEvent('vehiclekeys:client:ToggleEngine', source)
 end)
 
-QBCore.Commands.Add("givecarkeys", "Give Car Keys", {{name = "id", help = "Player id"}}, true, function(source, args)
+QBCore.Commands.Add("givecarkeys", Lang:t("info.vgivekeys"), {{name = "id", help = "Player id"}}, true, function(source, args)
 	local src = source
     local target = tonumber(args[1])
     TriggerClientEvent('vehiclekeys:client:GiveKeys', src, target)
@@ -129,15 +129,15 @@ RegisterNetEvent('vehiclekeys:server:RemoveKeys', function(plate, citizenid)
 
         if not result then
             if message == "failed_not_found" then
-                TriggerClientEvent('QBCore:Notify', src,  "Vehicle is not found.", "error")
+                TriggerClientEvent('QBCore:Notify', src,  Lang:t("notify.vvehiclenotfound"), "error")
             end
             return false
         end
 
-        TriggerClientEvent('QBCore:Notify', src,  ("You have removed the keys of vehicle %s"):format(plate), "success")
+        TriggerClientEvent('QBCore:Notify', src,  (Lang:t("notify.vremovekeys")):format(plate), "success")
 
     else
-        TriggerClientEvent('QBCore:Notify', src,  "You do not own this vehicle or lack the permissions.", "error")
+        TriggerClientEvent('QBCore:Notify', src,  Lang:t("notify.vnotyourvehiclepermission"), "error")
     end
 end)
 

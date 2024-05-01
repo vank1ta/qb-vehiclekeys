@@ -1,5 +1,4 @@
 -- Variableswiring
-
 local QBCore = exports['qb-core']:GetCoreObject()
 local HasKeys = false
 local KeysList = {}
@@ -87,9 +86,9 @@ local function LockVehicle()
                         SetVehicleLights(veh, 1)
                         Wait(200)
                         SetVehicleLights(veh, 0)
-                        QBCore.Functions.Notify("Vehicle locked!")
+                        QBCore.Functions.Notify(Lang:t("notify.vlock"))
                     else
-                        QBCore.Functions.Notify("Something went wrong with the locking system!")
+                        QBCore.Functions.Notify(Lang:t("notify.verrorkey"))
                     end
                 else
                     Wait(750)
@@ -102,13 +101,13 @@ local function LockVehicle()
                         SetVehicleLights(veh, 1)
                         Wait(200)
                         SetVehicleLights(veh, 0)
-                        QBCore.Functions.Notify("Vehicle unlocked!")
+                        QBCore.Functions.Notify(Lang:t("notify.vunlock"))
                     else
-                        QBCore.Functions.Notify("Something went wrong with the locking system!")
+                        QBCore.Functions.Notify(Lang:t("notify.verrorkey"))
                     end
                 end
             else
-                QBCore.Functions.Notify('You don\'t have the keys of the vehicle..', 'error')
+                QBCore.Functions.Notify(Lang:t("notify.vnokey"), 'error')
             end
         end, plate)
     end
@@ -158,8 +157,8 @@ local function PoliceCall()
                         Name = "Unknown"
                     end
                     local modelPlate = QBCore.Functions.GetPlate(vehicle)
-                    local msg = "Vehicle theft attempt at " .. streetLabel .. ". Vehicle: " .. Name .. ", Licenseplate: " .. modelPlate
-                    local alertTitle = "Vehicle theft attempt at"
+                    local msg = Lang:t("msg.vtheft") .. streetLabel .. ". Vehicle: " .. Name .. Lang:t("msg.vlicence") .. modelPlate
+                    local alertTitle = Lang:t("msg.vtheftatt")
                     TriggerServerEvent("police:server:VehicleCall", pos, msg, alertTitle, streetLabel, modelPlate, Name)
                 else
                     local vehicle = QBCore.Functions.GetClosestVehicle()
@@ -170,8 +169,8 @@ local function PoliceCall()
                     else
                         Name = "Unknown"
                     end
-                    local msg = "Vehicle theft attempt at " .. streetLabel .. ". Vehicle: " .. Name .. ", Licenseplate: " .. modelPlate
-                    local alertTitle = "Vehicle theft attempt at"
+                    local msg = Lang:t("msg.vtheft") .. streetLabel .. ". Vehicle: " .. Name .. Lang:t("msg.vlicence") .. modelPlate
+                    local alertTitle = Lang:t("msg.vtheftatt")
                     TriggerServerEvent("police:server:VehicleCall", pos, msg, alertTitle, streetLabel, modelPlate, Name)
                 end
             end
@@ -190,14 +189,14 @@ local function lockpickFinish(success)
     local chance = math.random()
     if success then
         TriggerServerEvent('hud:server:GainStress', math.random(1, 4))
-        QBCore.Functions.Notify('Opened Door!', 'success')
+        QBCore.Functions.Notify(Lang:t("notify.vopendoor"), 'success')
         SetVehicleDoorsLocked(vehicle, 1)
         lockpicked = true
         lockpickedPlate = QBCore.Functions.GetPlate(vehicle)
     else
         PoliceCall()
         TriggerServerEvent('hud:server:GainStress', math.random(1, 4))
-        QBCore.Functions.Notify('Someone Called The Police!', 'error')
+        QBCore.Functions.Notify(Lang:t("notify.vcallcops"), 'error')
     end
     if usingAdvanced then
         if chance <= Config.RemoveLockpickAdvanced then
@@ -230,7 +229,7 @@ local function LockpickDoor(isAdvanced)
                         TaskPlayAnim(ped, "veh@break_in@0h@p_m_one@", "low_force_entry_ds", 3.0, 3.0, -1, 16, 0, 0, 0, 0)
                     else
                         TriggerServerEvent('hud:server:GainStress', math.random(1, 4))
-                        QBCore.Functions.Notify("You failed lock-pick the vehicle !", "error")
+                        QBCore.Functions.Notify(Lang:t("notify.vfaillockpick"), "error")
                     end
                     end, 3, 20) -- NumberOfCircles, MS
             end
@@ -242,7 +241,7 @@ local function RobVehicle(target)
     IsRobbing = true
     loadAnimDict('mp_am_hold_up')
     TaskPlayAnim(target, "mp_am_hold_up", "holdup_victim_20s", 8.0, -8.0, -1, 2, 0, false, false, false)
-    QBCore.Functions.Progressbar("rob_keys", "Attempting Robbery..", 6000, false, true, {}, {}, {}, {}, function()
+    QBCore.Functions.Progressbar("rob_keys", Lang:t("Progressbar.vrob"), 6000, false, true, {}, {}, {}, {}, function()
         local chance = math.random()
         if chance <= Config.RobberyChance then
             veh = GetVehiclePedIsUsing(target)
@@ -253,7 +252,7 @@ local function RobVehicle(target)
             local plate = QBCore.Functions.GetPlate(GetVehiclePedIsIn(target, true))
             TriggerServerEvent('hud:server:GainStress', math.random(1, 4))
             TriggerEvent('vehiclekeys:client:SetOwner', plate)
-            QBCore.Functions.Notify('You Got The Keys!', 'success')
+            QBCore.Functions.Notify(Lang:t("notify.vgotkey"), 'success')
             Wait(10000)
             IsRobbing = false
         else
@@ -261,7 +260,7 @@ local function RobVehicle(target)
             ClearPedTasks(target)
             TaskReactAndFleePed(target, PlayerPedId())
             TriggerServerEvent('hud:server:GainStress', math.random(1, 4))
-            QBCore.Functions.Notify('They Called The Cops!', 'error')
+            QBCore.Functions.Notify(Lang:t("notify.vcalledthecop"), 'error')
             Wait(10000)
             IsRobbing = false
         end
@@ -320,7 +319,7 @@ RegisterNetEvent('vehiclekeys:client:GiveKeys', function(target)
         local plate = QBCore.Functions.GetPlate(GetVehiclePedIsIn(PlayerPedId(), true))
         TriggerServerEvent('qb-vehiclekeys:server:GiveVehicleKeys', plate, target)
     else
-        QBCore.Functions.Notify('you need to be in a vehicle to give key', 'error')
+        QBCore.Functions.Notify(Lang:t("notify.vneedkey"), 'error')
     end
 end)
 
@@ -354,7 +353,7 @@ end)
 
 -- command
 
-RegisterKeyMapping('togglelocks', 'Toggle Vehicle Locks', 'keyboard', 'L')
+RegisterKeyMapping('togglelocks', Lang:t("info.vtogglelocks"), 'keyboard', 'L')
 RegisterCommand('togglelocks', function()
     LockVehicle()
 end)
@@ -420,10 +419,10 @@ CreateThread(function()
                             lockpicked = false
                             TriggerServerEvent('hud:server:GainStress', math.random(1, 4))
                             TriggerEvent('vehiclekeys:client:SetOwner', QBCore.Functions.GetPlate(vehicle))
-                            QBCore.Functions.Notify("Hotwire succeeded!")
+                            QBCore.Functions.Notify(Lang:t("notify.vhotwiresuc"))
                         else
                             TriggerServerEvent('hud:server:GainStress', math.random(1, 4))
-                            QBCore.Functions.Notify("You failed lock-pick the vehicle !", "error")
+                            QBCore.Functions.Notify(Lang:t("notify.vhotwirefail"), "error")
                             Wait(15000)
                         end
                         end, 5, 20) -- NumberOfCircles, MS
